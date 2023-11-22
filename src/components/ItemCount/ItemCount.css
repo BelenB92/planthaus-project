@@ -1,0 +1,11 @@
+.counter__controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.button__cart{
+    padding-top: 14px;
+}
