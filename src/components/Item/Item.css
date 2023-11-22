@@ -1,0 +1,20 @@
+.item__card{
+    padding-top: 25px;
+}
+
+.item__img :hover{
+   opacity: 0.5;
+}
+
+.item__info{
+    font-weight: lighter;
+    padding-top: 20px;
+}
+
+.item__footer a{
+    color: black;
+}
+
+.item__footer a:hover{
+    color:olivedrab;
+}
