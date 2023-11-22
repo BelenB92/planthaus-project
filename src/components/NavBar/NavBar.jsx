@@ -4,18 +4,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import CartWidget from "../CartWidget/CartWidget";
 import plantHausLogo from "./assets/plantHausLogo.svg"
 import './NavBar.css';
+import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
         <Navbar className='navbar'>
             <Container>
-                <Navbar.Brand>
-                    <img src={plantHausLogo} alt="plant-haus-logo" />
-                </Navbar.Brand>
+                <Link to='/'>
+                    <Navbar.Brand>
+                        <img src={plantHausLogo} alt="plant-haus-logo" />
+                    </Navbar.Brand>
+                </Link>
                 <Nav className='nav-categories'>
-                    <button>De interior</button>
-                    <button>De exterior</button>
-                    <button>Macetas</button>
+                    <NavLink to={`/category/de-interior`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>De Interior</NavLink>
+                    <NavLink to={`/category/de-exterior`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>De Exterior</NavLink>
+                    <NavLink to={`/category/macetas`} className={({isActive}) => isActive ? 'ActiveOption' : 'Option'}>Macetas</NavLink>
                 </Nav>
                 <CartWidget/>
             </Container>
