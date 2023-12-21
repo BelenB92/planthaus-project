@@ -8,3 +8,23 @@
 .nav-categories{
     gap: 20px;
 }
+
+.Option{
+    font-weight: 500;
+    color: black;
+    text-decoration: inherit;
+}
+
+.Option:hover{
+    font-weight: 500;
+    color: olivedrab;
+    text-decoration: inherit;
+}
+
+.ActiveOption{
+    color: black;
+}
+
+.ActiveOption:hover{
+    color: olivedrab;
+}
