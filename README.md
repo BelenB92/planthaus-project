@@ -1,22 +1,22 @@
-Plant Haus
+#Plant Haus
 
-Descripción del proyecto:
+##Descripción del proyecto:
 Plant Haus es un ecommerce dedicado a la venta de plantas para el hogar.
 
-Instalación:
+##Instalación:
 git clone 
 npm install
 npm run dev
 
-Tecnologías usadas:
-React Js
-Node
-Vite
-React Router Dom
-Firebase
-Bootstrap
+##Tecnologías usadas:
+-React Js
+-Node
+-Vite
+-React Router Dom
+-Firebase
+-Bootstrap
 
-Capturas de pantalla
+##Capturas de pantalla
 
 ![image](https://github.com/BelenB92/planthaus-project/assets/75498745/02ceccf4-f27a-49fe-bab3-3b2fb22f9e73)
 
