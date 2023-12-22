@@ -6,12 +6,14 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import { CartContextProvider } from "./context/CartContext"
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout';
+import { FirebaseContextProvider } from './context/FirebaseContext';
 
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <FirebaseContextProvider>
       <CartContextProvider>
       <NavBar/>
       <Routes>
@@ -23,6 +25,7 @@ function App() {
         <Route path='*' element={<h1>404 NOT FOUND</h1>} />
       </Routes>
       </CartContextProvider>
+      </FirebaseContextProvider>
       </BrowserRouter>
     </div>
   )

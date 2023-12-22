@@ -3,6 +3,7 @@ import './Cart.css';
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
+import { Alert } from '@mui/material';
 
 const Cart = () => {
     const navigate = useNavigate()
@@ -10,12 +11,7 @@ const Cart = () => {
 
     const handleConfirmOrder = () => {
         if (cartItems.length === 0) {
-            Swal.fire({
-                title: "Carrito de compras vacio",
-                text: "Por favor, agrega productos antes de finalizar la compra",
-                icon: "error"
-            })
-
+            <Alert severity="error">Carrito de compras vacio</Alert>
         } else {
             navigate("/checkout")
         }

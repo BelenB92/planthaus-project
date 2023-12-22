@@ -1,41 +1,58 @@
 import './CheckoutForm.css';
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FirebaseContext } from "../../context/FirebaseContext";
+import { CartContext } from "../../context/CartContext";
 
-const CheckoutForm = ({ onConfirm }) => {
-    const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [mail, setMail] = useState('')
+const CheckoutForm = ({ cartItems, total }) => {
+    const { addOrderDB } = useContext(FirebaseContext)
+    const { clearCartItems, setTotalQuantity } = useContext(CartContext)
 
-    const handleConfirm = (event) => {
-        event.preventDefault()
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
+    const [mail, setMail] = useState("")
 
-        const userData = {
-            name, phone, mail
-        }
+    const [orderInfo, setOrderInfo] = useState(null)
 
-        onConfirm(userData)
+    const handleForm = async (e) => {
+        e.preventDefault()
+
+        const userData = { name, phone, mail }
+        const orderId = await addOrderDB(cartItems, userData, total)
+
+        setOrderInfo({
+            orderId,
+            items: cartItems,
+            total,
+        })
+
+        clearCartItems()
+        setTotalQuantity(0)
+
+        setName("")
+        setPhone("")
+        setMail("")
     }
 
     return(
         <div className="container">
-            <form onSubmit={handleConfirm} className="form">
+            <form onSubmit={handleForm} className="form">
                 <label className="label">
                     Nombre
                     <input 
                     type="text"
                     className="input"
                     value={name}
-                    onChange={({target}) => setName(target.value)} 
+                    onChange={(e) => setName(e.target.value)} 
                     />
                 </label>
                 <label className="label">
                     Telefono
                     <input 
-                    type="text"
+                    type="number"
                     className="input"
                     value={phone}
-                    onChange={({target}) => setPhone(target.value)} 
+                    onChange={(e) => setPhone(e.target.value)} 
                     />
                 </label>
                 <label className="label">
@@ -44,7 +61,7 @@ const CheckoutForm = ({ onConfirm }) => {
                     type="text"
                     className="input"
                     value={mail}
-                    onChange={({target}) => setMail(target.value)} 
+                    onChange={(e) => setMail(e.target.value)} 
                     />
                 </label>
                 <div>
@@ -53,6 +70,25 @@ const CheckoutForm = ({ onConfirm }) => {
                     </button>
                 </div>
             </form>
+
+            {orderInfo && (
+                <div className="alert alert-success mt-3" role="alert" style={{ width: "40%" }}>
+                    <h4 className="alert-heading">¡Compra realizada con éxito!</h4>
+                    <p>Tu orden con ID número {orderInfo.orderId} ha sido procesada.
+                    <br></br>
+                    <br></br>
+                    Detalles de la compra:</p>
+                    <ul>
+                        {orderInfo.items.map((item) => (
+                            <li key={item.id}>
+                                {item.name} - {item.quantity} x ${item.price} = ${item.quantity * item.price}
+                            </li>
+                        ))}
+                    </ul>
+                    <b>Total de la compra: ${orderInfo.items.reduce((total, item) => total + item.quantity * item.price, 0)}</b>
+                </div>
+            )}
+
         </div>
     )
 }

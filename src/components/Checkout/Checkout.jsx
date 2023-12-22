@@ -52,7 +52,7 @@ const Checkout = () => {
                 }
             })
 
-            if(outOfStock.length === 0){
+        /*    if(outOfStock.length === 0){
                 await batch.commit()
 
                 const orderRef = collection(db, 'orders')
@@ -63,6 +63,7 @@ const Checkout = () => {
             } else {
                 console.error('No hay stock del producto')
             }
+            */
 
         } catch(error) {
             console.log(error)
